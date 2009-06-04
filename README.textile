@@ -1,12 +1,22 @@
 h2. Norm -- The Norm Object Relational Mapper
 
-* Norm is a bad idea.  That's okay.  It's just for practice.
-* Norm makes RDBMS purists cry.  Crying isn't ACID compliant.
 * Norm defines the database schema as it is used.
-* Norm is semi-kinda-sorta inspired by jQuery.
+* Norm is semi-kinda-sorta inspired by jQuery:
+** There are methods like @$()@ (@Norm[]@ and @Norm::Model[]@) that will return either one or several items depending on the input.
+** Chainability is a design goal that has not been realized except for column addition and removal.  I'd like @Norm::Model[]@ results to be chainable, like jQuery's $().
+** I'm interested in applying the jQuery pattern of methods being a setter if an optional argument exits and a getter if it doesn't.  This allows chaining setters and getters, which can be nice.
+* Norm is vaguely inspired by Datamapper.  They seem like a really cool project.
 * Norm takes "convention over configuration" seriously.
-* Norm is Not an ORM, really, in that it'll never be a full-fledged ORM.
-* Norm only depends on the mysql gem.  Requiring activesupport would make some things easier, but is not within the scope of this experiment.
+* *Norm is &lt; 300 lines.*  Norm came about because I was playing with Sinatra and wanted an ORM that was similarly minimalist and lightweight (although Norm is not at all fast, unlike Sinatra).
+* Caveats
+** Norm is a bad idea.  That's okay.  It's just for practice.
+** Norm makes RDBMS purists cry.  Crying isn't ACID compliant.
+** Norm is <b>N</b>ot an *ORM*, really, in that it'll never be a full-fledged ORM.
+** Norm only depends on the mysql gem.  Requiring activesupport would make some things easier, but is not within the scope of this experiment.
+** Norm is MySQL-only and probably will always be that way.
+** Norm is not intended to be used for anything serious.  Norm is an experiment and a self-educational lesson.
+** Norm makes more database calls than necessary.  A lot more.
+
 
 bc. require 'norm'
 Norm.database = "norm"
@@ -16,8 +26,6 @@ desk = Norm::Desk.new :height => '3 feet', :depth => '2 feet', :width => '2 feet
 will connect to database "norm," create a table "desk," and add three columns to it, as well as making and saving the first record, which can now be accessed like @Norm::Desk.first@, @Norm::Desk[desk.id]@, @Norm::Desk['where height = "3 feet"']@, or (at this point), @Norm::Desk.all@
 
 h3. Caveats
-* Norm is MySQL-only and probably will always be that way.
-* Norm is not intended to be used for anything serious.  Norm is an experiment and a self-educational lesson.
 
 h3. Basics
 
