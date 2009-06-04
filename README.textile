@@ -1,4 +1,6 @@
 h2. Norm -- The Norm Object Relational Mapper
+* Norm is a bad idea.  That's okay.  It's just for practice.
+* Norm makes RDBMS purists cry.  Crying isn't ACID compliant.
 * Norm defines the database schema as it is used.
 * Norm is semi-kinda-sorta inspired by jQuery.
 * Norm takes "convention over configuration" seriously.
