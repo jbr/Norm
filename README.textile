@@ -1,0 +1,53 @@
+h2. Norm -- The Norm Object Relational Mapper
+* Norm defines the database schema as it is used.
+* Norm is semi-kinda-sorta inspired by jQuery.
+* Norm takes "convention over configuration" seriously.
+* Norm is Not an ORM, really, in that it'll never be a full-fledged ORM.
+* Norm only depends on the mysql gem.  Requiring activesupport would make some things easier, but is not within the scope of this experiment.
+
+bc. require 'norm'
+Norm.database = "norm"
+desk = Norm::Desk.new :height => '3 feet', :depth => '2 feet', :width => '2 feet'
+
+
+will connect to database "norm," create a table "desk," and add three columns to it, as well as making and saving the first record, which can now be accessed like @Norm::Desk.first@, @Norm::Desk[desk.id]@, @Norm::Desk['where height = "3 feet"']@, or (at this point), @Norm::Desk.all@
+
+h3. Caveats
+* Norm is MySQL-only and probably will always be that way.
+* Norm is not intended to be used for anything serious.  Norm is an experiment and a self-educational lesson.
+
+h3. Basics
+
+You can make a new Norm class (and table) as simply as
+
+bc. require 'norm'
+class Desk
+  include Norm
+end
+
+or, for a bit of lazy:
+
+bc. require 'norm'
+Norm::Desk
+
+either of which will make a table @`desk`@ on definition.
+
+* @d = Desk.new@ both makes and saves a new desk, auto-incrementing an id column (@d.id@).
+* @d.purpose = 'writing'@ adds a column @desk.purpose@ in mysql and sets it for the row with id @d.id@.
+* @d.delete@ deletes that desk.
+
+h3. Associations
+
+Norm operates on the convention that associations are named the same thing as the associated table name.  The association is singular whether or not it's a plural association.  You're a programmer, you can live without pluralization.
+
+bc.. require 'norm'
+p = Parent.new
+c1 = Child.new
+c2 = Child.new
+
+c1.parent = p
+c2.parent = p
+
+p.child.size #=> 2
+
+h3. That's all for now.  Hope you think it's interesting!
