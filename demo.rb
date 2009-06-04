@@ -21,12 +21,21 @@ module Norm
   assert Table["where material = 'squid'"].nil?
   
   assert !const_defined?(:Chair)
-  chair = Chair.new :type => "stool", :table => table
+  chair = Chair.new :variety => "stool", :table => table
   assert chair.table == table
   assert table.chair == chair
-
-  second_chair = Chair.new :type => 'lounge', :table => table
+  
+  second_chair = Chair.new :variety => 'lounge', :table => table
   assert table.chair.include?(second_chair) && table.chair.include?(chair)
   assert Chair.all == table.chair
   assert chair.table == second_chair.table
+  
+  assert chair.table
+  Chair - 'table' #remove the column
+  assert chair.table.nil?
+  assert !chair.attributes.keys.include?('table')
+  assert chair.attributes.keys.include?('variety')
+  assert ["id", "variety"] == Chair.columns.map{|c| c.to_s}.sort
+  Chair + 'table' + 'material' - 'variety'#add the column back, add a new column (material), and remove variety
+  assert ["id", "material", "table"] == Chair.columns.map{|c| c.to_s}.sort
 end

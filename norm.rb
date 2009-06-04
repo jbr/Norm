@@ -231,7 +231,17 @@ module Norm
     end
     
     def ensure_column(column)
-      Norm["alter table `#{table_name}` add column `#{column}` varchar(255)"] unless column_exists?(column)
+      self + column unless column_exists?(column)
+    end
+    
+    def +(column)
+      Norm["alter table `#{table_name}` add column `#{column}` varchar(255)"]
+      self
+    end
+    
+    def -(column)
+      Norm["alter table `#{table_name}` drop column `#{column}`"]
+      self
     end
     
     def ensure_table
