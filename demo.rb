@@ -8,6 +8,7 @@ N.tables.each{|m| N.drop m}
 assert N.tables.empty? #Empty hat, no rabbit
 
 module Norm
+  assert !const_defined?(:Table)
   table = Table.new :material => "wood"
   assert Table.last == table
   assert Table.first == table
@@ -19,6 +20,7 @@ module Norm
   assert Table["where material = 'wood'"] == table
   assert Table["where material = 'squid'"].nil?
   
+  assert !const_defined?(:Chair)
   chair = Chair.new :type => "stool", :table => table
   assert chair.table == table
   assert table.chair == chair
