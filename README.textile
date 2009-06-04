@@ -18,26 +18,32 @@ h2. Norm -- The Norm Object Relational Mapper
 ** Norm makes more database calls than necessary.  A lot more.
 
 
-bc. require 'norm'
+<pre><code>
+require 'norm'
 Norm.database = "norm"
 desk = Norm::Desk.new :height => '3 feet', :depth => '2 feet', :width => '2 feet'
+</code></pre>
 
 
-will connect to database "norm," create a table "desk," and add three columns to it, as well as making and saving the first record, which can now be accessed like @Norm::Desk.first@, @Norm::Desk[desk.id]@, @Norm::Desk['where height = "3 feet"']@, or (at this point), @Norm::Desk.all@
+p. will connect to database "norm," create a table "desk," and add three columns to it, as well as making and saving the first record, which can now be accessed like @Norm::Desk.first@, @Norm::Desk[desk.id]@, @Norm::Desk['where height = "3 feet"']@, or (at this point), @Norm::Desk.all@
 
 h3. Basics
 
 You can make a new Norm class (and table) as simply as
 
-bc. require 'norm'
+<pre><code>
+require 'norm'
 class Desk
   include Norm
 end
+</code></pre>
 
-or, for a bit of lazy:
+p. or, for a bit of lazy:
 
-bc. require 'norm'
+<pre><code>
+require 'norm'
 Norm::Desk
+</code></pre>
 
 either of which will make a table @`desk`@ on definition.
 
@@ -49,7 +55,8 @@ h3. Associations
 
 Norm operates on the convention that associations are named the same thing as the associated table name.  The association is singular whether or not it's a plural association.  You're a programmer, you can live without pluralization.
 
-bc.. require 'norm'
+<pre><code>
+require 'norm'
 p = Norm::Parent.new
 c1 = Norm::Child.new
 c2 = Norm::Child.new
@@ -58,5 +65,6 @@ c1.parent = p
 c2.parent = p
 
 p.child.size #=> 2
+</code></pre>
 
 h3. That's all for now.  Hope you think it's interesting!
