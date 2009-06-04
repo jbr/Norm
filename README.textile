@@ -25,8 +25,6 @@ desk = Norm::Desk.new :height => '3 feet', :depth => '2 feet', :width => '2 feet
 
 will connect to database "norm," create a table "desk," and add three columns to it, as well as making and saving the first record, which can now be accessed like @Norm::Desk.first@, @Norm::Desk[desk.id]@, @Norm::Desk['where height = "3 feet"']@, or (at this point), @Norm::Desk.all@
 
-h3. Caveats
-
 h3. Basics
 
 You can make a new Norm class (and table) as simply as
